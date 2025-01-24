@@ -12,9 +12,9 @@ public interface EventRepository extends JpaRepository<Event, Long>, QuerydslPre
 
     List<Event> findAllByIdIn(List<Long> events);
 
-    List<Event> findAllByInitiator(User Initiator, PageRequest pagenation);
+    List<Event> findAllByInitiator(User initiator, PageRequest pagenation);
 
-    Optional<Event> findAllByInitiatorAndId(User Initiator, Long id);
+    Optional<Event> findAllByInitiatorAndId(User initiator, Long id);
 
     Boolean existsByCategoryId(Long catId);
 }

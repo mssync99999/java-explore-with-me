@@ -35,7 +35,7 @@ public class PublicEventController {
                                            @RequestParam(name = "sort", defaultValue = "EVENT_DATE") SortType sort,
                                            @RequestParam(name = "from", defaultValue = "0") @PositiveOrZero Integer from,
                                            @RequestParam(name = "size", defaultValue = "10") @Positive Integer size,
-                                           HttpServletRequest request ) {
+                                           HttpServletRequest request) {
         log.info("PublicEventController.getEvents_1(text {}, categories {}, paid {}, rangeStart {}, rangeEnd {}, onlyAvailable {}, sort {}, from {}, size {})", text, categories, paid, rangeStart, rangeEnd, onlyAvailable, sort, from, size);
 
         return eventService.getEvents_1(text, categories, paid, rangeStart, rangeEnd, onlyAvailable, sort, from, size, request);

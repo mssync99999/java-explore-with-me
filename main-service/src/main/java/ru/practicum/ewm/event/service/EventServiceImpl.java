@@ -12,7 +12,6 @@ import ru.practicum.dto.EndpointHitDto;
 import ru.practicum.dto.ViewStatsDto;
 import ru.practicum.ewm.category.model.Category;
 import ru.practicum.ewm.category.repository.CategoryRepository;
-import ru.practicum.ewm.compilation.repository.CompilationRepository;
 import ru.practicum.ewm.enums.*;
 import ru.practicum.ewm.event.dto.*;
 import ru.practicum.ewm.event.mapper.EventMapper;
@@ -406,7 +405,7 @@ public class EventServiceImpl implements EventService {
         }
 
         boolean newStatusConfirmed;
-        if (obj.getStatus() == Status.CONFIRMED ) {
+        if (obj.getStatus() == Status.CONFIRMED) {
             newStatusConfirmed = true;
         } else {
             newStatusConfirmed = false;
@@ -547,8 +546,8 @@ public class EventServiceImpl implements EventService {
         //обновим Long confirmedRequests (количество одобренных заявок на участие в данном событии)
         if (getConfirms) {
             //обновим Long confirmedRequests (количество одобренных заявок на участие в данном событии)
-            List<Long> idEventList = events.stream().
-                    map(Event::getId)
+            List<Long> idEventList = events.stream()
+                    .map(Event::getId)
                     .toList();
 
             List<Request> confirmsList = requestRepository.findAllByEventIdInAndStatusIs(idEventList, StatusRequest.CONFIRMED);
