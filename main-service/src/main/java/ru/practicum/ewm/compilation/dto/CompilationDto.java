@@ -8,9 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.practicum.ewm.event.dto.EventShortDto;
-
 import java.util.List;
-
 
 //Подборка событий
 @Data //Lombok, чтобы сгенерировать геттеры и сеттеры для полей
@@ -18,21 +16,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompilationDto {
-
     private List<EventShortDto> events; //Список идентификаторов событий входящих в подборку ?-Set<Long>
 
     @NotNull
     private Long id; //Идентификатор
 
-    //?-@Builder.Default
-    //?-pinned = Boolean.FALSE
     @NotNull
     private Boolean pinned; //Закреплена ли подборка на главной странице сайта
 
     @NotBlank
     @Size(min = 1,max = 50)
     private String title; //Заголовок подборки
-
-
-
 }

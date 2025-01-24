@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @Slf4j
-@RestControllerAdvice //включает централизованную(глобальную) обработку ошибок всего проекта
+@RestControllerAdvice
 public class ErrorHandler {
-
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT) //409
@@ -24,14 +23,14 @@ public class ErrorHandler {
         return new ApiError(e, e.getMessage(), "Нарушение целостности данных", HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler //? или @ExceptionHandler(DoubleException.class)
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT) //409
     public ApiError handle(final DoubleException e) {
         log.debug("Получено исключение {}", e.getMessage());
         return new ApiError(e, e.getMessage(), "Нарушение целостности данных", HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler //? или @ExceptionHandler(BadInitiatorException.class)
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT) //409
     public ApiError handle(final BadInitiatorException e) {
         log.debug("Получено исключение {}", e.getMessage());
@@ -45,52 +44,40 @@ public class ErrorHandler {
         return new ApiError(e, e.getMessage(), "Нарушение целостности данных", HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler //? или @ExceptionHandler(BadLimitException.class)
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT) //409
     public ApiError handle(final BadLimitException e) {
         log.debug("Получено исключение {}", e.getMessage());
         return new ApiError(e, e.getMessage(), "Нарушение целостности данных", HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler //? или @ExceptionHandler(WrongEventDateException.class)
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT) //409
     public ApiError handle(final WrongEventDateException e) {
         log.debug("Получено исключение {}", e.getMessage());
         return new ApiError(e, e.getMessage(), "Нарушение целостности данных", HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler //? или @ExceptionHandler(WrongConditionsException.class)
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT) //409
     public ApiError handle(final WrongConditionsException e) {
         log.debug("Получено исключение {}", e.getMessage());
         return new ApiError(e, e.getMessage(), "Событие не удовлетворяет правилам редактирования", HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler //? или @ExceptionHandler(BadRequestException.class)
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST) //400
     public ApiError handle(final BadRequestException e) {
         log.debug("Получено исключение {}", e.getMessage());
         return new ApiError(e, e.getMessage(), "Запрос составлен некорректно", HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler //? или @ExceptionHandler(BadStatServiceException.class)
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //500
     public ApiError handle(final BadStatServiceException e) {
         log.debug("Получено исключение {}", e.getMessage());
         return new ApiError(e, e.getMessage(), "Запрос составлен некорректно", HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-    //
-    /*
-    //MethodArgumentNotValidException вернёт 400 для @Validated в методе контроллера
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST) //400
-    public ApiError handle(final MethodArgumentNotValidException e) {
-        log.debug("Получено исключение {}", e.getMessage());
-        return new ApiError(e, e.getMessage(), "Запрос составлен некорректно", HttpStatus.BAD_REQUEST);
-    }
-
-     */
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
@@ -98,7 +85,6 @@ public class ErrorHandler {
         log.debug("Получено исключение {}", e.getMessage());
         return new ApiError(e, e.getMessage(), "The required object was not found.", HttpStatus.NOT_FOUND);
     }
-
 
     @ExceptionHandler({
             MethodArgumentNotValidException.class,
@@ -111,71 +97,7 @@ public class ErrorHandler {
     public ApiError handle(final Exception e) {
         log.debug("Получено исключение {}", e.getMessage());
 
-        /*
-                if (ex instanceof MissingRequestHeaderException) {
-            MissingRequestHeaderException headerEx = (MissingRequestHeaderException) ex;
-            error.put("error", "Отсутствует обязательный заголовок: " + headerEx.getHeaderName());
-        } else if (ex instanceof MissingServletRequestParameterException) {
-            MissingServletRequestParameterException paramEx = (MissingServletRequestParameterException) ex;
-            error.put("error", "Отсутствует обязательный параметр: " + paramEx.getParameterName());
-        } else if (ex instanceof MethodArgumentTypeMismatchException) {
-            MethodArgumentTypeMismatchException typeMismatchEx = (MethodArgumentTypeMismatchException) ex;
-            error.put("error", "Неверный тип аргумента: " + typeMismatchEx.getName());
-        } else if (ex instanceof HttpMessageNotReadableException) {
-            HttpMessageNotReadableException notReadableEx = (HttpMessageNotReadableException) ex;
-            error.put("error", "Ошибка чтения тела запроса: " + notReadableEx.getMessage());
-        }
-         */
         return new ApiError(e, e.getMessage(), "Запрос составлен некорректно", HttpStatus.BAD_REQUEST);
     }
 
-
-
-
-    /*
-    @ExceptionHandler //перенаправляет исключение TestMyAnyCustomException в этот метод
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handleTestMyAnyCustomException(final TestMyAnyCustomException e) {
-        //TestMyAnyCustomException - моё кастомное исключение вызываемое где-либо через: throw new ...
-        log.debug("Получен статус 400 BAD_REQUEST {}", e);
-
-        //ConstraintViolationException 409
-
-
-        return new ApiError("Ошибка ...", e.getMessage());
-    }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //500
-    public ErrorResponse handle(final Exception e) {
-        return new ErrorResponse("Ошибка ...", e.getMessage());
-    }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleRuntimeException(final RuntimeException e) {
-        return new ErrorResponse("Ошибка ...", e.getMessage());
-    }
-
-     */
-
-
 }
-
-/*
-//если требуется обработать ошибки только в контроллере CatsInteractionController
-@ControllerAdvice(assignableTypes = CatsInteractionController.class)
-
-ИЛИ
-
-//если требуется обработать ошибки в некоторых контроллерах
-@ControllerAdvice(assignableTypes = {DogsInteractionController.class, CatsInteractionController.class})
-
-//Если необходимо обработать сразу все классы, которые находятся в одном пакете, можно воспользоваться одним из следующих вариантов:
-
-@ControllerAdvice("ru.yandex.practicum.controller")
-или
-@ControllerAdvice(value = "ru.yandex.practicum.controller")
-или
-@ControllerAdvice(basePackages = "ru.yandex.practicum.controller")
- */

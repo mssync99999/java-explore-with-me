@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.practicum.ewm.enums.Status;
 import ru.practicum.ewm.request.dto.ParticipationRequestDto;
-
 import java.util.List;
 
 //Результат подтверждения/отклонения заявок на участие в событии
@@ -20,5 +18,3 @@ public class EventRequestStatusUpdateResult {
     private List<ParticipationRequestDto> rejectedRequests; //Заявки отклонения на участие в событии
 
 }
-
-//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

@@ -1,19 +1,13 @@
 package ru.practicum.ewm.event.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.practicum.ewm.category.dto.CategoryDto;
-import ru.practicum.ewm.enums.State;
 import ru.practicum.ewm.enums.StateAction;
 import ru.practicum.ewm.event.model.Location;
-import ru.practicum.ewm.user.dto.UserShortDto;
-
 import java.time.LocalDateTime;
 
 @Data //Lombok, чтобы сгенерировать геттеры и сеттеры для полей
@@ -22,13 +16,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UpdateEventAdminRequest {
 
-    //@Size(min = 20, max = 2000, message = "Для описания требуется от 20 до 2000 символов.", groups = {UpdateObject.class})
-    @Size(min = 20,max = 2000) //!!!
+    @Size(min = 20,max = 2000)
     private String annotation;
 
     private Long category;
 
-    @Size(min=20, max = 7000) //!!!
+    @Size(min=20, max = 7000)
     private String description;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -40,8 +33,6 @@ public class UpdateEventAdminRequest {
     private Boolean requestModeration; //Нужна ли пре-модерация заявок на участие
     private StateAction stateAction; //новое состояний жизненного цикла события
 
-    @Size(min = 3,max = 120) //!!!
+    @Size(min = 3,max = 120)
     private String title; //Заголовок
 }
-
-//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

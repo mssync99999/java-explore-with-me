@@ -1,7 +1,6 @@
 package ru.practicum.ewm.event.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -10,14 +9,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.practicum.ewm.category.dto.CategoryDto;
-import ru.practicum.ewm.category.model.Category;
 import ru.practicum.ewm.enums.State;
 import ru.practicum.ewm.event.model.Location;
 import ru.practicum.ewm.user.dto.UserShortDto;
-import ru.practicum.ewm.user.model.User;
-
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data //Lombok, чтобы сгенерировать геттеры и сеттеры для полей
 @Builder //создаёт через билдер произвольный конструктор
@@ -59,7 +54,6 @@ public class EventFullDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime publishedOn; //Дата и время публикации события (в формате "yyyy-MM-dd HH:mm:ss")
 
-    //default: true
     @Builder.Default
     private Boolean requestModeration = true; //Нужна ли пре-модерация заявок на участие
 
@@ -72,5 +66,3 @@ public class EventFullDto {
     private Long views; //Количество просмотрев события
 
 }
-
-//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

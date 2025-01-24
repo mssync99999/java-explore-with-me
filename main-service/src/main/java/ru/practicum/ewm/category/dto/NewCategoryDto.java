@@ -7,8 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data //Lombok, чтобы сгенерировать геттеры и сеттеры для полей
-@Builder //создаёт через билдер произвольный конструктор
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewCategoryDto {

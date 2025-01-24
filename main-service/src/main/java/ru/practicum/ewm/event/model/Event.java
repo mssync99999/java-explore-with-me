@@ -5,14 +5,13 @@ import lombok.*;
 import ru.practicum.ewm.category.model.Category;
 import ru.practicum.ewm.enums.State;
 import ru.practicum.ewm.user.model.User;
-import ru.practicum.ewm.event.model.Location;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @ToString
 @Builder
-@Entity //POM <artifactId>jakarta.persistence-api</artifactId>
+@Entity
 @Table(name = "events")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +23,7 @@ public class Event {
     @Column(nullable = false, length = 2000)
     private String annotation;
 
-    @ManyToOne //позволяет делать запросные методы с id , например - findAllByBookerId наряду с findAllByBooker
+    @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
@@ -32,22 +31,21 @@ public class Event {
 
     private LocalDateTime createdOn; //Дата и время создания события (в формате "yyyy-MM-dd HH:mm:ss")
 
-    @Column(length = 7000) //?-@Size
+    @Column(length = 7000)
     private String description;
 
     @Column(name = "event_date", nullable = false)
     private LocalDateTime eventDate; //Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
 
-    @ManyToOne //позволяет делать запросные методы с id , например - findAllByBookerId наряду с findAllByBooker
+    @ManyToOne
     @JoinColumn(name = "initiator_id", nullable = false)
     private User initiator; //Пользователь (краткая информация)
 
-    @ManyToOne //позволяет делать запросные методы с id , например - findAllByBookerId наряду с findAllByBooker
-    @JoinColumn(name = "location_id") //, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "location_id")
     private Location location; //Широта и долгота места проведения события
 
-
-    @Column(nullable = false)  //?-@NotNull
+    @Column(nullable = false)
     private Boolean paid; //Нужно ли оплачивать участие
 
     @Column(name = "participant_limit")
@@ -56,11 +54,11 @@ public class Event {
     @Column(name = "published_on")
     private LocalDateTime publishedOn; //Дата и время публикации события (в формате "yyyy-MM-dd HH:mm:ss")
 
-    @Column(name = "request_moderation") //default: true
+    @Column(name = "request_moderation")
     private Boolean requestModeration; //Нужна ли пре-модерация заявок на участие
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 25)  //?-@Size
+    @Column(length = 25)
     private State state; //Список состояний жизненного цикла события
 
     @Column(nullable = false, length = 2000)
@@ -68,17 +66,4 @@ public class Event {
 
     private Long views; //Количество просмотрев события
 
-
-    //@ManyToOne //позволяет делать запросные методы с id , например - findAllByBookerId наряду с findAllByBooker
-    //@JoinColumn(name = "booker_id")
-    //private User booker;
-
-    //@Enumerated(EnumType.STRING)
-    //@Column(name = "status", nullable = false)
-    //private Status status;
-
-    //@Transient
-    //private Booking nextBooking;
-    //@Transient
-    //private List<CommentDto> comments;
 }

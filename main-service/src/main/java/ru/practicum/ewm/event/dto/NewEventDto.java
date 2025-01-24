@@ -9,11 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.practicum.ewm.category.dto.CategoryDto;
-import ru.practicum.ewm.enums.State;
 import ru.practicum.ewm.event.model.Location;
-import ru.practicum.ewm.user.dto.UserShortDto;
-
 import java.time.LocalDateTime;
 
 @Data //Lombok, чтобы сгенерировать геттеры и сеттеры для полей
@@ -40,16 +36,13 @@ public class NewEventDto {
     @NotNull
     private Location location; //Широта и долгота места проведения события
 
-    //default: false
     @Builder.Default
     private Boolean paid = false; //Нужно ли оплачивать участие
 
-    //default: 0
     @Builder.Default
     @PositiveOrZero
     private Integer participantLimit = 0; //Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
 
-    //default: true
     @Builder.Default
     private Boolean requestModeration = true; //Нужна ли пре-модерация заявок на участие
 
@@ -58,5 +51,3 @@ public class NewEventDto {
     private String title; //Заголовок
 
 }
-
-//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

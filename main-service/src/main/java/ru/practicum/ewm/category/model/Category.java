@@ -1,14 +1,13 @@
 package ru.practicum.ewm.category.model;
 
-import java.time.LocalDateTime;
-import jakarta.persistence.*; //POM <artifactId>jakarta.persistence-api</artifactId>
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @Builder
-@Entity //POM <artifactId>jakarta.persistence-api</artifactId>
+@Entity
 @Table(name = "categories")
 @AllArgsConstructor
 @NoArgsConstructor

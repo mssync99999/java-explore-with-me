@@ -2,15 +2,11 @@ package ru.practicum.ewm.compilation.mapper;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import ru.practicum.ewm.category.dto.CategoryDto;
-import ru.practicum.ewm.category.dto.NewCategoryDto;
-import ru.practicum.ewm.category.model.Category;
 import ru.practicum.ewm.compilation.dto.CompilationDto;
 import ru.practicum.ewm.compilation.dto.NewCompilationDto;
 import ru.practicum.ewm.compilation.dto.UpdateCompilationRequest;
 import ru.practicum.ewm.compilation.model.Compilation;
 import ru.practicum.ewm.event.dto.EventShortDto;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import ru.practicum.ewm.event.mapper.*;
@@ -29,30 +25,23 @@ public class CompilationMapper {
                 .pinned(compilation.getPinned())
                 .title(compilation.getTitle())
                 .events(tmp)
-                //...
-                //.itemId(booking.getItem() != null ? booking.getItem().getId() : null)
                 .build();
     }
 
     public static Compilation toCompilation(NewCompilationDto newCompilationDto, List<Event> events) {
         return Compilation.builder()
-                //.id(newCompilationDto.getId())
                 .pinned(newCompilationDto.getPinned())
                 .title(newCompilationDto.getTitle())
                 .events(events)
-                //...
                 .build();
     }
 
     public static Compilation toCompilation(UpdateCompilationRequest updateCompilationRequest, List<Event> events) {
         return Compilation.builder()
-                //.id(newCompilationDto.getId())
                 .pinned(updateCompilationRequest.getPinned())
                 .title(updateCompilationRequest.getTitle())
                 .events(events)
-                //...
                 .build();
     }
-
 
 }

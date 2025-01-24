@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.practicum.ewm.enums.StateAction;
 import ru.practicum.ewm.event.model.Location;
-
 import java.time.LocalDateTime;
 
 @Data //Lombok, чтобы сгенерировать геттеры и сеттеры для полей
@@ -17,12 +16,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateEventUserRequest {
-    @Size(min = 20,max = 2000) //!!!
+    @Size(min = 20,max = 2000)
     private String annotation;
 
     private Long category;
 
-    @Size(min=20, max = 7000) //!!!
+    @Size(min=20, max = 7000)
     private String description;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -30,13 +29,13 @@ public class UpdateEventUserRequest {
 
     private Location location; //Широта и долгота места проведения события
     private Boolean paid; //Нужно ли оплачивать участие
+
     @PositiveOrZero
     private Integer participantLimit; //Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
+
     private Boolean requestModeration; //Нужна ли пре-модерация заявок на участие
     private StateAction stateAction; //новое состояний жизненного цикла события
 
-    @Size(min = 3,max = 120) //!!!
+    @Size(min = 3,max = 120)
     private String title; //Заголовок
 }
-
-//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

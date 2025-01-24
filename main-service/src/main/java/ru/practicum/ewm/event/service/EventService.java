@@ -1,15 +1,6 @@
 package ru.practicum.ewm.event.service;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.compilation.dto.CompilationDto;
-import ru.practicum.ewm.compilation.dto.NewCompilationDto;
-import ru.practicum.ewm.compilation.dto.UpdateCompilationRequest;
 import ru.practicum.ewm.enums.SortType;
 import ru.practicum.ewm.enums.State;
 import ru.practicum.ewm.event.dto.*;
@@ -31,8 +22,6 @@ public interface EventService {
 
     //Изменение события
     EventFullDto updateEvent_1(Long eventId, UpdateEventAdminRequest updateEventAdminRequest);
-
-
 
     //Получение событий, добавленных текущим пользователем
     List<EventFullDto> getEvents(Long userId, Integer from, Integer size);
@@ -59,4 +48,4 @@ public interface EventService {
     //Получение подборки событий по его id
     EventFullDto getEvent_1(Long id, HttpServletRequest request);
 
-    }
+}

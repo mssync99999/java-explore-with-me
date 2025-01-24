@@ -3,14 +3,13 @@ package ru.practicum.ewm.compilation.model;
 import jakarta.persistence.*;
 import lombok.*;
 import ru.practicum.ewm.event.model.*;
-
 import java.util.List;
 
 @Getter
 @Setter
 @ToString
 @Builder
-@Entity //POM <artifactId>jakarta.persistence-api</artifactId>
+@Entity
 @Table(name = "compilations", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
