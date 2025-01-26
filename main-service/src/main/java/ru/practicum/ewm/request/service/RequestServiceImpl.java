@@ -2,6 +2,7 @@ package ru.practicum.ewm.request.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.enums.State;
 import ru.practicum.ewm.enums.StatusRequest;
 import ru.practicum.ewm.event.model.Event;
@@ -41,6 +42,7 @@ public class RequestServiceImpl implements RequestService {
 
     }
 
+    @Transactional
     @Override
     public ParticipationRequestDto addParticipationRequest(Long userId, Long eventId) {
 
@@ -90,6 +92,7 @@ public class RequestServiceImpl implements RequestService {
         return RequestMapper.toParticipationRequestDto(requestRepository.save(newObj)); //нельзя добавить повторный запрос (Ожидается код ошибки 409)
     }
 
+    @Transactional
     @Override
     public ParticipationRequestDto cancelRequest(Long userId, Long requestId) {
         User user = userRepository.findById(userId)

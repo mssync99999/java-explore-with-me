@@ -3,6 +3,7 @@ package ru.practicum.ewm.compilation.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.compilation.dto.CompilationDto;
 import ru.practicum.ewm.compilation.dto.NewCompilationDto;
 import ru.practicum.ewm.compilation.dto.UpdateCompilationRequest;
@@ -21,6 +22,7 @@ public class CompilationServiceImpl implements CompilationService {
     private final CompilationRepository compilationRepository;
     private final EventRepository eventRepository;
 
+    @Transactional
     @Override
     public CompilationDto saveCompilation(NewCompilationDto newCompilationDto) {
         List<Event> eventsObj = List.of();
@@ -33,6 +35,7 @@ public class CompilationServiceImpl implements CompilationService {
         return CompilationMapper.toCompilationDto(compilationRepository.save(compilation));
     }
 
+    @Transactional
     @Override
     public void deleteCompilation(Long compId) {
         if (!compilationRepository.existsById(compId)) {
@@ -42,6 +45,7 @@ public class CompilationServiceImpl implements CompilationService {
         compilationRepository.deleteById(compId);
     }
 
+    @Transactional
     @Override
     public CompilationDto updateCompilation(Long compId, UpdateCompilationRequest updateCompilationRequest) {
         Compilation compilation = compilationRepository.findById(compId)

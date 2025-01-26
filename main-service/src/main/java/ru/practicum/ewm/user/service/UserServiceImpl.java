@@ -3,6 +3,7 @@ package ru.practicum.ewm.user.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.exception.DoubleException;
 import ru.practicum.ewm.user.dto.NewUserRequest;
 import ru.practicum.ewm.user.dto.UserDto;
@@ -34,6 +35,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Transactional
     @Override
     public UserDto registerUser(NewUserRequest newUserRequest) {
 
@@ -44,6 +46,7 @@ public class UserServiceImpl implements UserService {
         return UserMapper.toUserDto(userRepository.save(UserMapper.toUser(newUserRequest)));
     }
 
+    @Transactional
     @Override
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);

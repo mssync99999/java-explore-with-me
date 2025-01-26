@@ -2,6 +2,7 @@ package ru.practicum.server.service;
 
 //import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.server.exception.BadRequestException;
 import org.springframework.stereotype.Service;
 import ru.practicum.dto.EndpointHitDto;
@@ -17,6 +18,7 @@ import java.util.List;
 public class StatsServiceImpl implements StatsService {
     private final StatsRepository statsRepository;
 
+    @Transactional
     @Override
     public void create(EndpointHitDto endpointHitDto) {
         statsRepository.save(StatsMapper.toStat(endpointHitDto));

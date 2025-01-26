@@ -1,6 +1,7 @@
 package ru.practicum.ewm.category.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.event.repository.EventRepository;
 import ru.practicum.ewm.exception.*;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final EventRepository eventRepository;
 
+    @Transactional
     @Override
     public CategoryDto addCategory(NewCategoryDto newCategoryDto) {
         Category category = CategoryMapper.toCategory(newCategoryDto);
@@ -30,6 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
         return CategoryMapper.toCategoryDto(categoryRepository.save(category));
     }
 
+    @Transactional
     @Override
     public void deleteCategory(Long catId) {
         if (!categoryRepository.existsById(catId)) {
@@ -44,6 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.deleteById(catId);
     }
 
+    @Transactional
     @Override
     public CategoryDto updateCategory(Long catId, CategoryDto categoryDto) {
         //базовые проверки
