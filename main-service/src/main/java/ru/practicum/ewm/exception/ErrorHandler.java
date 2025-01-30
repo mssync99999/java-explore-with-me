@@ -86,6 +86,13 @@ public class ErrorHandler {
         return new ApiError(e, e.getMessage(), "The required object was not found.", HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.FORBIDDEN) //403
+    public ApiError handle(final WrongUserException e) {
+        log.debug("Получено исключение {}", e.getMessage());
+        return new ApiError(e, e.getMessage(), "Ошибка привелегий.", HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler({
             MethodArgumentNotValidException.class,
             MissingRequestHeaderException.class,
